@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Banglore Home Price Prediction</title>
+
+    <!-- Jquery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Fontawesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="{{ url_for('static', filename = 'app.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'app.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-bar">
+            <a href="/" class="nav-item brand">
+                <img src="{{ url_for('static', filename='logo.svg') }}" alt="logo">
+            </a>
+            <a href="/" class="nav-item">House Price Prediction</a>
+            <a href="/about" class="nav-item">About Us</a>
+        </div>
+    </nav>
+    <main>
+        <div class="main-bg"></div>
+
+        <div class="filters container">
+            <h2 class='apply-filters'>Apply Filters <i class="fa fa-filter" aria-hidden="true"></i></h2>
+            <form class="form ">
+
+                <div class="form-container">
+                <div class="filter">
+                    <h2>Area (Square Feet)</h2>
+                    <input class="area" type="text" id="uiSqft" class="floatLabel" name="Squareft" value="1000">
+                </div>
+
+                <div class="filter">
+                    <h2>BHK</h2>
+                    <div class="switch-field" >
+                        <input type="radio" id="radio-bhk-1" name="uiBHK" value="1" />
+                        <label for="radio-bhk-1">1</label>
+                        <input type="radio" id="radio-bhk-2" name="uiBHK" value="2" checked />
+                        <label for="radio-bhk-2">2</label>
+                        <input type="radio" id="radio-bhk-3" name="uiBHK" value="3" />
+                        <label for="radio-bhk-3">3</label>
+                        <input type="radio" id="radio-bhk-4" name="uiBHK" value="4" />
+                        <label for="radio-bhk-4">4</label>
+                        <input type="radio" id="radio-bhk-5" name="uiBHK" value="5" />
+                        <label for="radio-bhk-5">5</label>
+                    </div>
+                </div>
+
+                <div class="filter">
+                    <h2>Bath</h2>
+                    <div class="switch-field">
+                        <input type="radio" id="radio-bath-1" name="uiBathrooms" value="1" />
+                        <label for="radio-bath-1">1</label>
+                        <input type="radio" id="radio-bath-2" name="uiBathrooms" value="2" checked />
+                        <label for="radio-bath-2">2</label>
+                        <input type="radio" id="radio-bath-3" name="uiBathrooms" value="3" />
+                        <label for="radio-bath-3">3</label>
+                        <input type="radio" id="radio-bath-4" name="uiBathrooms" value="4" />
+                        <label for="radio-bath-4">4</label>
+                        <input type="radio" id="radio-bath-5" name="uiBathrooms" value="5" />
+                        <label for="radio-bath-5">5</label>
+                    </div>
+                </div>
+
+                <div class="filter">
+                    <h2>Location</h2>
+                    <div>
+                        <select class="location" name="" id="uiLocations">
+                            <option value="" disabled="disabled" selected="selected">Choose a Location</option>
+                            <option>Electronic City</option>
+                            <option>Rajaji Nagar</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+                <button class="submit" onclick="onClickedEstimatePrice()" type="button">Estimate Price</button>
+
+            </form>
+            <div id="uiEstimatedPrice" class="result">
+                <h2></h2>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
