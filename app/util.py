@@ -41,6 +41,7 @@ def load_saved_artifacts():
     PICKEL_PATH = os.path.join(os.getcwd(), 'app', 'artifacts', 'bangalore_home_prices_model.pickle')
     with open(PICKEL_PATH, 'rb') as f:
         __model = pickle.load(f)
+        print('loading success')
         
     print("Loading the artifacts...done")
     

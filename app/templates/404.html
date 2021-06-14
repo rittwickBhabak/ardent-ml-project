@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Banglore Home Price Prediction | Developers | About</title>
+    <link rel="shortcut icon" href="/house.ico">
+
+    <!-- Jquery JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Fontawesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+        integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script type="text/javascript" src="{{ url_for('static', filename = 'app.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'app.css') }}">
+</head>
+
+<body>
+
+    <nav>
+        <div class="container nav-bar">
+            <a href="/" class="nav-item brand">
+                <img src="{{ url_for('static', filename='logo.svg') }}" alt="logo">
+            </a>
+            <a href="/" class="nav-item">House Price Prediction</a>
+            <a href="/about" class="nav-item">About Us</a>
+        </div>
+    </nav>
+    <main>
+        <div class="main-bg"></div>
+
+        <div class="container">
+            <div class="heading-404">404 - Page Not Found</div>
+        </div>
+    </main>
+</body>
+
+</html>

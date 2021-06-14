@@ -32,6 +32,9 @@ def predict_home_price():
     response.headers.add("Access-Control-Allow-Origin", "*")
     return response
     
+@app.errorhandler(404)
+def error404(request):
+    return render_template('404.html')
 
 if __name__ == "__main__":
     print("Starting the Flask Server...")

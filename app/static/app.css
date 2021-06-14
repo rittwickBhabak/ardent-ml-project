@@ -245,20 +245,29 @@ main {
 
 .developer-name{
     margin-left: 10px;
-    font-size: 1.5rem
+    font-size: 1.2rem;
 }
 
 .developer-img > img{
-    height: 100px;
-    width: 100%;
     display: block;
     border-radius: 50%;
+	height: 100px;
+	width: 100px;
 }
 
 .developer > h1{
     display: inline;
     height: 100%;
     border: 1px solid black;
+}
+
+.heading-404{
+	text-align: center;
+	height: 80vh;
+	width: 100%;
+	font-size: 2rem;
+	text-shadow: 1px 1px 1px #fff, -1px -1px 1px #fff;
+	color: black;
 }
 
 @media (max-width: 576px) {

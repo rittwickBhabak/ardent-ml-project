@@ -1,3 +1,12 @@
+let devlopment = true 
+let HOST = null
+if(devlopment)
+{
+    HOST = '127.0.0.1:5000'
+}else {
+    HOST = 'https://ml-g3.herokuapp.com'
+}
+
 function getBathValue() {
     var uiBathrooms = document.getElementsByName("uiBathrooms");
     for (var i in uiBathrooms) {
@@ -26,7 +35,7 @@ function onClickedEstimatePrice() {
     var location = document.getElementById("uiLocations");
     var estPrice = document.getElementById("uiEstimatedPrice");
 
-    var url = "https://ml-g3.herokuapp.com/predict_home_price"; //Use this if you are NOT using nginx 
+    var url = `https://ml-g3.herokuapp.com/predict_home_price`; //Use this if you are NOT using nginx 
     // var url = "/api/predict_home_price"; // Use this if  you are using nginx. 
 
     $.post(url, {
@@ -44,12 +53,13 @@ function onClickedEstimatePrice() {
 
 function onPageLoad() {
     console.log("document loaded");
-    var url = "https://ml-g3.herokuapp.com/get_location_names"; // Use this if you are NOT using nginx 
+    var url = 'https://ml-g3.herokuapp.com/get_location_names'; // Use this if you are NOT using nginx 
     // var url = "/api/get_location_names"; // Use this if  you are using nginx. 
     $.get(url, function (data, status) {
         console.log("got response for get_location_names request");
         if (data) {
             var locations = data.locations;
+            // console.log(locations)
             $('#uiLocations').empty();
             for (var i in locations) {
                 var opt = new Option(locations[i]);
