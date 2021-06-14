@@ -33,12 +33,12 @@ def load_saved_artifacts():
     global __locations
     global __model
     
-    COLUMNS_PATH = os.path.join(os.getcwd(), 'artifacts', 'columns.json')
+    COLUMNS_PATH = os.path.join(os.getcwd(), 'app', 'artifacts', 'columns.json')
     with open(COLUMNS_PATH, 'r') as f:
         __data_columns = json.load(f)["data_columns"]
         __locations = __data_columns[3:]
         
-    PICKEL_PATH = os.path.join(os.getcwd(), 'artifacts', 'bangalore_home_prices_model.pickle')
+    PICKEL_PATH = os.path.join(os.getcwd(), 'app', 'artifacts', 'bangalore_home_prices_model.pickle')
     with open(PICKEL_PATH, 'rb') as f:
         __model = pickle.load(f)
         
