@@ -1,52 +1,51 @@
 import pandas as pd
 import numpy as np
-# import matplotlib.pyplot as #plt
-# %matplotlib inline
-# import matplotlib
-# matplotlib.rcParams["figure.figsize"] = (20, 10)
-import os 
+import os
+##import matplotlib.pyplot as plt
+#%matplotlib inline
+#import matplotlib
+#matplotlib.rcParams["figure.figsize"] = (20, 10)
+CSV_PATH = os.path.join(os.getcwd(), 'artifacts', 'Bengaluru_House_Data.csv')
+df1 = pd.read_csv(CSV_PATH)
+df1.head()
 
-FILE_PATH = os.path.join(os.getcwd(), 'artifacts', 'Bengaluru_House_Data.csv')
-df1 = pd.read_csv(FILE_PATH)
-# df1.head()
-
-# df1.shape
+df1.shape
 
 ## Data Cleanning Process
 
 testd =  df1.groupby('area_type').count()
-# testd
+testd
 
 df1.groupby('area_type')["area_type"].agg("count")  #shows the count of particular area types
 
 
 df2 = df1.drop(["area_type", "society", "balcony", "availability"], axis="columns") # dropping unnecessary columns
 
-# df2.head()
+df2.head()
 
 df2.isnull().sum() # counting the missing values for each column
 
 df3 = df2.dropna()  # droping the rows containing any null value
-# df3.shape
+df3.shape
 
 df3.isnull().sum()
 
 # examining size column
 
-# df3['size'].unique()
+df3['size'].unique()
 
 df3['bhk'] = df3['size'].apply(lambda x : int(x.split(" ")[0]))
 
-# df3.head()
+df3.head()
 
-# df3['bhk'].unique()
+df3['bhk'].unique()
 
-# df3[df3["bhk"] > 20]
+df3[df3["bhk"] > 20]
 
 # examining total_sqft column
-# len(df3["total_sqft"].unique())
+len(df3["total_sqft"].unique())
 
-# df3["total_sqft"].unique()
+df3["total_sqft"].unique()
 
 def is_float(x):
     try:
@@ -56,7 +55,7 @@ def is_float(x):
     return True
 
 # checking the total sqft values which is not float
-# df3[~df3["total_sqft"].apply(is_float)].head(10)
+df3[~df3["total_sqft"].apply(is_float)].head(10)
 
 def convert_sqft_to_num(x):
     tokens = x.split("-")
@@ -76,13 +75,13 @@ convert_sqft_to_num("34.46Sq. Meter	")
 
 df4 = df3.copy()
 df4["total_sqft"] = df4["total_sqft"].apply(convert_sqft_to_num)
-# df4.head(10)
+df4.head(10)
 
-# df4.iloc[30]
+df4.iloc[30]
 
-# df4.shape
+df4.shape
 
-# df4.loc[410]
+df4.loc[410]
 
 ## Feature Engineering
 
@@ -91,27 +90,27 @@ df5 = df4.copy()
 # creating price_per_sqft column
 
 df5["price_per_sqft"] = df5["price"]*100000 / df5["total_sqft"]
-# df5.head(10)
+df5.head(10)
 
 # examining the location column
 
-# df5["location"].unique()
+df5["location"].unique()
 
-# len(df5["location"].unique())
+len(df5["location"].unique())
 
 df5["location"] = df5["location"].apply(lambda x : x.strip()) # remove trailing and leading space
 
 location_stats = df5.groupby("location")['location'].agg("count").sort_values(ascending = False)  # finding the count of unique locations
-# location_stats
+location_stats
 
-# len(location_stats[location_stats <= 10])
+len(location_stats[location_stats <= 10])
 
 location_stats_less_than_10 = location_stats[location_stats <= 10]
-# location_stats_less_than_10
+location_stats_less_than_10
 
 # making the location attribute "other" if the count of the location is <= 10
 df5["location"] = df5["location"].apply(lambda x : "other" if x in location_stats_less_than_10 else x)  
-# df5.head(10)
+df5.head(10)
 
 len(df5["location"].unique()) #now we have only 242 unique location
 
@@ -123,17 +122,17 @@ len(df5["location"].unique()) #now we have only 242 unique location
 # we are finding the flats where size of a room in very small say less than 300 sqft
 # We are considering them anomaly
 
-# df5[df5["total_sqft"] / df5["bhk"] < 300].head(10)
+df5[df5["total_sqft"] / df5["bhk"] < 300].head(10)
 
-# df5.shape
+df5.shape
 
 df6 = df5[~(df5["total_sqft"] / df5["bhk"] < 300)]  # removing those anomalies
 
-# df6.shape
+df6.shape
 
 # checking the price_per_sqft column
 
-# df6["price_per_sqft"].describe()
+df6["price_per_sqft"].describe()
 
 def remove_pps_outliers(df):
     df_out = pd.DataFrame()
@@ -147,22 +146,22 @@ def remove_pps_outliers(df):
 
 df7 = remove_pps_outliers(df6)
 
-# df7.shape
+df7.shape
 
 def plot_scatter_chart(df, location):
     bhk2 = df[(df["location"] == location) & (df["bhk"] == 2)]
     bhk3 = df[(df["location"] == location) & (df["bhk"] == 3)]
     
-    # matplotlib.rcParams["figure.figsize"] = (15, 10)
-    # #plt.scatter(bhk2["total_sqft"], bhk2["price"], color="blue", label="2 BHK", s = 50)
-    # #plt.scatter(bhk3["total_sqft"], bhk3["price"], marker = "+", color="green", label="3 BHK", s = 50)
+    #matplotlib.rcParams["figure.figsize"] = (15, 10)
+#    plt.scatter(bhk2["total_sqft"], bhk2["price"], color="blue", label="2 BHK", s = 50)
+#    plt.scatter(bhk3["total_sqft"], bhk3["price"], marker = "+", color="green", label="3 BHK", s = 50)
     
-    # #plt.xlabel("Total Square Feet Area")
-    # #plt.ylabel("Price")
-    # #plt.title(location)
-    # #plt.legend()
+#    plt.xlabel("Total Square Feet Area")
+#    plt.ylabel("Price")
+#    plt.title(location)
+#    plt.legend()
     
-# plot_scatter_chart(df7, "Hebbal")
+plot_scatter_chart(df7, "Hebbal")
 
 def remove_bhk_outliers(df):
     exclude_indices = np.array([])
@@ -185,19 +184,19 @@ def remove_bhk_outliers(df):
 
 df8 = remove_bhk_outliers(df7)
 
-# df8.shape
+df8.shape
 
-# plot_scatter_chart(df8, "Hebbal")
+plot_scatter_chart(df8, "Hebbal")
 
-# matplotlib.rcParams["figure.figsize"] = (20, 10)
+#matplotlib.rcParams["figure.figsize"] = (20, 10)
 #plt.hist(df8["price_per_sqft"], rwidth = 0.8)
 #plt.xlabel("Price Per Square Feet")
 #plt.ylabel("Count")
 
 # exploring bathroom features
-# df8["bath"].unique()
+df8["bath"].unique()
 
-# df8[df8["bath"] > 10]
+df8[df8["bath"] > 10]
 
 #plt.hist(df8["bath"], rwidth = 0.8)
 #plt.xlabel("Number of bathrooms")
@@ -205,35 +204,35 @@ df8 = remove_bhk_outliers(df7)
 
 #removing bathroom outliers (number of bathroom > no. of bedroom + 2)
 
-# df8[df8["bath"] > df8["bhk"] + 2]
+df8[df8["bath"] > df8["bhk"] + 2]
 
 df9 = df8[df8["bath"] < df8["bhk"] + 2]
 
-# df9.shape
+df9.shape
 
 df10 = df9.drop(["size", "price_per_sqft"], axis = "columns")
 
-# df10.head(10)
+df10.head(10)
 
 # hot encoding the location attribute
 
 dummies = pd.get_dummies(df10["location"])
-# dummies.head(5)
+dummies.head(5)
 
 df11 = pd.concat([df10, dummies.drop("other", axis = "columns")], axis = "columns")
-# df11.head(5)
+df11.head(5)
 
 df12 = df11.drop("location", axis = "columns")
-# df12.head()
+df12.head()
 
-# df12.shape
+df12.shape
 
 # Building the Model
 X = df12.drop("price", axis = "columns") #all independent variables
-# X.head()
+X.head()
 
 y = df12["price"]
-# y.head()
+y.head()
 
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 10)
@@ -298,9 +297,9 @@ find_best_model_using_gridsearchcv(X, y)
 
 # clearly Linear regression is the winner here,with which we already train our model
 
-# X.columns
+X.columns
 
-# np.where(X.columns == "1st Phase JP Nagar")[0][0]
+np.where(X.columns == "1st Phase JP Nagar")[0][0]
 
 def predict_price(location, sqft, bath, bhk):
     loc_index = np.where(X.columns == location)[0][0]
@@ -326,8 +325,8 @@ predict_price("Indira Nagar", 1000, 3, 3)
 
 # exporting the model in a pickle file
 import pickle
-PICKLE_FILE_PATH = os.path.join(os.getcwd(), 'artifacts', 'bangalore_home_prices_model.pickle')
-with open(PICKLE_FILE_PATH, 'wb') as f:
+PICKLE_PATH = os.path.join(os.getcwd(), 'artifacts', 'bangalore_home_prices_model.pickle')
+with open(PICKLE_PATH, 'wb') as f:
     pickle.dump(lr_clf, f)
 
 # exporting the column information
