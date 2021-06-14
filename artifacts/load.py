@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as #plt
 # %matplotlib inline
-import matplotlib
-matplotlib.rcParams["figure.figsize"] = (20, 10)
+# import matplotlib
+# matplotlib.rcParams["figure.figsize"] = (20, 10)
 import os 
 
-FILE_PATH = os.path.join(os.getcwd(), 'app', 'artifacts', 'Bengaluru_House_Data.csv')
+FILE_PATH = os.path.join(os.getcwd(), 'artifacts', 'Bengaluru_House_Data.csv')
 df1 = pd.read_csv(FILE_PATH)
 # df1.head()
 
@@ -153,14 +153,14 @@ def plot_scatter_chart(df, location):
     bhk2 = df[(df["location"] == location) & (df["bhk"] == 2)]
     bhk3 = df[(df["location"] == location) & (df["bhk"] == 3)]
     
-    matplotlib.rcParams["figure.figsize"] = (15, 10)
-    plt.scatter(bhk2["total_sqft"], bhk2["price"], color="blue", label="2 BHK", s = 50)
-    plt.scatter(bhk3["total_sqft"], bhk3["price"], marker = "+", color="green", label="3 BHK", s = 50)
+    # matplotlib.rcParams["figure.figsize"] = (15, 10)
+    # #plt.scatter(bhk2["total_sqft"], bhk2["price"], color="blue", label="2 BHK", s = 50)
+    # #plt.scatter(bhk3["total_sqft"], bhk3["price"], marker = "+", color="green", label="3 BHK", s = 50)
     
-    plt.xlabel("Total Square Feet Area")
-    plt.ylabel("Price")
-    plt.title(location)
-    plt.legend()
+    # #plt.xlabel("Total Square Feet Area")
+    # #plt.ylabel("Price")
+    # #plt.title(location)
+    # #plt.legend()
     
 # plot_scatter_chart(df7, "Hebbal")
 
@@ -190,18 +190,18 @@ df8 = remove_bhk_outliers(df7)
 # plot_scatter_chart(df8, "Hebbal")
 
 # matplotlib.rcParams["figure.figsize"] = (20, 10)
-# plt.hist(df8["price_per_sqft"], rwidth = 0.8)
-# plt.xlabel("Price Per Square Feet")
-# plt.ylabel("Count")
+#plt.hist(df8["price_per_sqft"], rwidth = 0.8)
+#plt.xlabel("Price Per Square Feet")
+#plt.ylabel("Count")
 
 # exploring bathroom features
 # df8["bath"].unique()
 
 # df8[df8["bath"] > 10]
 
-# plt.hist(df8["bath"], rwidth = 0.8)
-# plt.xlabel("Number of bathrooms")
-# plt.ylabel("Count")
+#plt.hist(df8["bath"], rwidth = 0.8)
+#plt.xlabel("Number of bathrooms")
+#plt.ylabel("Count")
 
 #removing bathroom outliers (number of bathroom > no. of bedroom + 2)
 
@@ -326,7 +326,7 @@ predict_price("Indira Nagar", 1000, 3, 3)
 
 # exporting the model in a pickle file
 import pickle
-PICKLE_FILE_PATH = os.path.join(os.getcwd(), 'app', 'artifacts', 'bangalore_home_prices_model.pickle')
+PICKLE_FILE_PATH = os.path.join(os.getcwd(), 'artifacts', 'bangalore_home_prices_model.pickle')
 with open(PICKLE_FILE_PATH, 'wb') as f:
     pickle.dump(lr_clf, f)
 
