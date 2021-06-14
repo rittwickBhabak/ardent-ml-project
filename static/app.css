@@ -274,14 +274,7 @@ main {
 	.container {
 		width: 540px;
 	}
-}
-@media (min-width: 576px) {
-	.container {
-		width: 540px;
-	}
-}
-@media (max-width: 922px) {
-    .apply-filters{
+	.apply-filters{
         text-align: center;
     }
 	.form-container {
@@ -299,6 +292,14 @@ main {
         margin: auto;
         width: 50%;
     }
+}
+@media (min-width: 576px) {
+	.container {
+		width: 540px;
+	}
+}
+@media (max-width: 922px) {
+    
 }
 @media (min-width: 576px) {
 	.form-container {
