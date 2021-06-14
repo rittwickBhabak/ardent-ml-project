@@ -274,7 +274,18 @@ main {
 	.container {
 		width: 540px;
 	}
-	.apply-filters{
+	
+}
+@media (min-width: 576px) {
+	.container {
+		width: 540px;
+	}
+	.form-container {
+		flex-direction: row;
+	}
+}
+@media (max-width: 922px) {
+    .apply-filters{
         text-align: center;
     }
 	.form-container {
@@ -294,17 +305,7 @@ main {
     }
 }
 @media (min-width: 576px) {
-	.container {
-		width: 540px;
-	}
-}
-@media (max-width: 922px) {
-    
-}
-@media (min-width: 576px) {
-	.form-container {
-		flex-direction: row;
-	}
+	
 }
 @media (min-width: 768px) {
 	.container {
